@@ -1,0 +1,106 @@
+Combination Sum
+
+
+Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target.
+
+The same repeated number may be chosen from candidates unlimited number of times.
+
+Note:
+
+All numbers (including target) will be positive integers.
+The solution set must not contain duplicate combinations.
+Example 1:
+
+Input: candidates = [2,3,6,7], target = 7,
+A solution set is:
+[
+  [7],
+  [2,2,3]
+]
+
+Time:2of n
+Space:o(n)
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> lst = new ArrayList<>();
+        comHelper(res, lst, 0, target, candidates, 0);
+        return res;
+    }
+    
+    public void comHelper(List<List<Integer>> res,  List<Integer> lst, int sum, int target, int[] cand, int start) {
+        
+        System.out.println(start);
+        
+        if (sum > target) {
+            return;
+        }
+        else if (sum == target) {
+            res.add(new ArrayList<>(lst));
+        }
+        else {
+            for (int i = start; i < cand.length; i++) {
+                lst.add(cand[i]);
+                sum = sumHelper(lst);
+                comHelper(res, lst, sum, target, cand, i);
+                lst.remove(lst.size() - 1);
+            }
+        }
+        
+    }
+    
+    public int sumHelper(List<Integer> lst) {
+        int sum = 0;
+        for (Integer i : lst) {
+            sum += i;
+        }
+        return sum;
+    } 
+}
+
+
+
+
+
+
+
+
+
+
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> lst = new ArrayList<>();
+        comHelper(res, lst, 0, target, candidates, 0);
+        return res;
+    }
+    
+    public void comHelper(List<List<Integer>> res,  List<Integer> lst, int sum, int target, int[] cand, int start) {
+        
+        System.out.println(start);
+        
+        if (sum > target) {
+            return;
+        }
+        else if (sum == target) {
+            res.add(new ArrayList<>(lst));
+        }
+        else {
+            for (int i = start; i < cand.length; i++) {
+                lst.add(cand[i]);
+                sum = sumHelper(lst);
+                comHelper(res, lst, sum, target, cand, i);
+                lst.remove(lst.size() - 1);
+            }
+        }
+        
+    }
+    
+    public int sumHelper(List<Integer> lst) {
+        int sum = 0;
+        for (Integer i : lst) {
+            sum += i;
+        }
+        return sum;
+    } 
+}
