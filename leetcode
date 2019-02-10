@@ -1,0 +1,92 @@
+All Nodes Distance K in Binary Tree
+We are given a binary tree (with root node root), a target node, and an integer value K.
+
+Return a list of the values of all nodes that have a distance K from the target node.  The answer can be returned in any order.
+
+ 
+
+Example 1:
+
+Input: root = [3,5,1,6,2,0,8,null,null,7,4], target = 5, K = 2
+
+Output: [7,4,1]
+
+Explanation: 
+The nodes that are a distance 2 from the target node (with value 5)
+have values 7, 4, and 1.
+
+Complexity Analysis
+
+Time Complexity: O(N), where NN is the number of nodes in the given tree.
+
+Space Complexity: O(N). 
+
+SOl:
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+      public List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
+        List<Integer> res = new ArrayList<Integer>();
+        if (root == null) {
+            return res;
+        }
+        
+        Map<TreeNode, TreeNode> map = new HashMap<>();
+        findParent(root, null, map);
+        
+        Set<TreeNode> set = new HashSet<>();
+        Queue<TreeNode> que = new LinkedList<>();
+        set.add(target);
+        que.offer(target);
+        
+        int level = 0;
+        while (!que.isEmpty()) {
+            int size = que.size();
+            
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = que.poll();
+                 System.out.println(level);
+                System.out.println(cur.val);
+                if (level == K) {
+                    res.add(cur.val);
+                     System.out.println(" ");
+                }
+           
+                if (cur.left != null) {
+                    if (!set.contains(cur.left)) {
+                        set.add(cur.left);
+                        que.offer(cur.left);
+                    }
+                }
+                if (cur.right != null) {
+                    if (!set.contains(cur.right)) {
+                        set.add(cur.right);
+                        que.offer(cur.right);
+                    }
+                }
+                if (map.get(cur) != null) {
+                    if (!set.contains(map.get(cur))) {
+                        set.add(map.get(cur));
+                        que.offer(map.get(cur));
+                    }
+                }
+            }
+            level++;
+        }
+        return res;
+    }
+    private void findParent(TreeNode root, TreeNode parent, Map<TreeNode, TreeNode> map) {
+        if (root == null) { return; }
+        map.put(root, parent);
+        
+        findParent(root.left, root, map);
+        findParent(root.right, root, map);
+    }
+}
