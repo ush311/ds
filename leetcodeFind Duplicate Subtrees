@@ -23,7 +23,11 @@ and
     4
 
 
+Complexity Analysis
 
+Time Complexity: O(N)O(N), where NN is the number of nodes in the tree. We visit each node once.
+
+Space Complexity: O(N)O(N). Every structure we use is using O(1)O(1) storage per node.
 
 
 
