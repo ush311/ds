@@ -8,7 +8,8 @@ Input: [[1,1],2,[1,1]]
 Output: [1,1,2,1,1]
 Explanation: By calling next repeatedly until hasNext returns false, 
              the order of elements returned by next should be: [1,1,2,1,1].
-             
+   Time:o(n)
+   space:o(1)
           Sol:
           
           /**
